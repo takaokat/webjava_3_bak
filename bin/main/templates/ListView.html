@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>ProductList</title>
+</head>
+<body>
+	<h1>商品一覧</h1>
+	<ul>
+	<li th:each="item : ${itemList}">
+		<form action="#" th:action="@{/AddOrder}" th:object="${listForm}" method="POST">
+			<input type="hidden" name="itemId" th:value="${item.value.itemId}" />
+			<input type="hidden" name="price" th:value="${item.value.price}" />
+			<span th:text="${item.value.name}"></span><br>
+			<span th:text="  '価格' + ${item.value.price} + '円'"></span>
+			<select th:name="num">
+				<option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}"></option>
+			</select>
+			<input type="submit" value="カートに追加" />
+		</form>
+	</li>
+	</ul>
+</body>
+</html>
